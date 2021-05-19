@@ -1,0 +1,46 @@
+$period = Period::create($request->all());
+    
+        $indicators = collect($request->input(key:'indicators', []))
+                    ->map(function($indicators)
+            {
+             return['amount'=>$indicators];   
+            });
+return $request;
+          $period->indicators()->attach($request->indicators);  
+
+        //if($request->indicators)
+        //{
+        //$period->indicators()->attach(['amount' => $indicators]);
+        return redirect()->route('guest.periods.edit', $period);
+
+
+ $period = Period::create($request->all());
+
+            $indicators = collect($request->input(key:'indicators',$indicators))
+                         ->map(function($indicator) {
+                             return ['amount' => $indicator];
+                         });   
+            $period->indicators()->attach($indicators);
+            return redirect()->route('guest.periods.edit', $period);
+
+
+            return $request;
+        $period = Period::create($request->all());
+        if($request->indicators)
+        
+        $period->indicators()->attach($request->indicators);
+
+$period->indicators()->attach($request->indicators);
+
+
+ public function store(StoreRecordRequest $request)
+    {
+        
+        $period = Period::create($request->all());
+        if($request->indicators)
+        
+        $period->indicators()->attach($request->indicators, ['amount' => 100, 'observation' => 'texto']);
+        return $request;
+    }
+
+
