@@ -33,21 +33,19 @@ class PeriodController extends Controller
     }
 
     
-   
     public function store(StoreRecordRequest $request)
     {
         
         $period = Period::create($request->all());
+        
         if($request->indicators)
-
-        $indicadors=$request->indicators;
-	    foreach($indicadors as $indicator){
-
-        $period->indicators()->attach($indicator, ['amount' => 100, 'observation' => 'texto']);
+                
+        $period->indicators()->attach($request->indicators);
+        
+        
+        //return $request
     }
-        //return $request;
-    }
-
+        
       
     public function show($id)
     {

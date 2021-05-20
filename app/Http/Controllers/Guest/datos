@@ -44,3 +44,4 @@ $period->indicators()->attach($request->indicators);
     }
 
 
+//if ($request->has(['indicators','amount','observation']))
