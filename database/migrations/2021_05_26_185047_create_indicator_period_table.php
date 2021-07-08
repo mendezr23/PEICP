@@ -13,7 +13,7 @@ class CreateIndicatorPeriodTable extends Migration
      */
     public function up()
     {
-        Schema::create('indicator_periods', function (Blueprint $table) {
+        Schema::create('indicator_period', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('indicator_id');
             $table->unsignedBigInteger('period_id');

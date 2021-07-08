@@ -61,7 +61,13 @@
              <td>{{$period->quadrant->state}}</td>
              <td>{{$period->quadrant->municipality->name}}</td>
              <td>{{$period->quadrant->parish}}</td>
-             <td>{{$period->indicators_sum_amount}}</td>
+             <td>{{$period->indicators_sum_indicator_periodamount}}
+             {{-- @foreach ($period->indicators as $indicator)
+             {{ $indicator->pivot->sum('amount')   }}
+             @endforeach --}}
+            </td>
+             
+
              <td>{{Carbon\Carbon::parse($period->date_regis)->format('d-m-Y')}}</td>
              
          </tr>
@@ -71,9 +77,9 @@
   </table>
   
  </div>
-    <div class="card-footer">
+    {{-- <div class="card-footer">
         {{$periods->links()}}
-     </div>
+     </div> --}}
      
     </div>
 </div>

@@ -5,8 +5,9 @@ namespace Database\Seeders;
 use App\Models\Indicator;
 use App\Models\Quadrant;
 use App\Models\Period;
+use App\Models\Indicator_period;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +28,19 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeSeeder::class);
         $this->call(OrganismSeeder::class);
         Quadrant::factory(25)->create();
-        Period::factory(10)->create();
+        $periods = Period::factory(10)->create();
+        
+        foreach ($periods as $period ) {
+            DB::table('indicator_period')->insert([
+                'indicator_id' => Indicator::all()->random()->id,
+                'period_id' => $period->id,
+                'amount' => 30,
+                'observation' => 'observacion prueba'
+
+            ]);
+        }
+       
+
         
     }
 }
