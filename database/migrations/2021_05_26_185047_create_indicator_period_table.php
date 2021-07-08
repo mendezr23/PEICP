@@ -13,16 +13,14 @@ class CreateIndicatorPeriodTable extends Migration
      */
     public function up()
     {
-        Schema::create('indicator_period', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('indicator_periods', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('indicator_id');
             $table->unsignedBigInteger('period_id');
             $table->integer('amount')->nullable();
             $table->string('observation')->nullable();
-
             $table->foreign('indicator_id')->references('id')->on('indicators');
             $table->foreign('period_id')->references('id')->on('periods');
-            
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateIndicatorPeriodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indicator__period');
+        Schema::dropIfExists('indicator_period');
     }
 }

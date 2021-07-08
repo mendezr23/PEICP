@@ -10,7 +10,9 @@
 
 @section('content')
     @livewire('admin.users-index')
+
 @stop
+
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">

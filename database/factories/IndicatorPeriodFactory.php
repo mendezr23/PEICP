@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Organism;
+use App\Models\Indicator_period;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrganismFactory extends Factory
+class IndicatorPeriodFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Organism::class;
+    protected $model = Indicator_period::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class OrganismFactory extends Factory
     public function definition()
     {
         return [
-           
-            'name' => $this->faker->text(10),
-            
+            //
         ];
     }
 }

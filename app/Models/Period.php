@@ -32,8 +32,9 @@ class Period extends Model
     
     public function indicators(){
 
-        return $this->belongsToMany(Indicator::class)
+        return $this->belongsToMany(Indicator::class,'indicator_periods')
                     ->withPivot('amount','observation')
+                    ->orderBy('amount','desc')
                     ->withTimestamps();
     } 
 

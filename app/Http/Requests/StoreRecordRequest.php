@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Period;
 Use Illuminate\Validation\Rule;
 
 
@@ -28,9 +27,23 @@ class StoreRecordRequest extends FormRequest
     {
         return 
         [
-                    'date_regis' => Rule::unique('periods')->where(function ($query) {
+            
+              
+                'date_regis' => Rule::unique('periods')->where(function ($query) {
                     return $query->where('quadrant_id', $this->quadrant_id);
             })
+        
+            
+        ];
+
+    }
+
+    public function messages()
+    {
+        return[
+                        
+            'date_regis.unique' => 'La Fecha seleccionada, esta registrada y asociada a un cuadrante'
+
         ];
     }
 }

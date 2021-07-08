@@ -16,7 +16,7 @@ class CreatePeriodsTable extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->date('date_regis');
+            $table->dateTime('date_regis');
             $table->unsignedBigInteger('quadrant_id')->nullable(); 
 
             $table->foreign('user_id')->references('id')->on('users');

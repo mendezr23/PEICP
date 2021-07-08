@@ -4,20 +4,28 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Period;
+use App\Models\User;
 use App\Models\Quadrant;
 use App\Models\Indicator;
-use Illuminate\Http\Request;
+use App\Models\Indicator_period;
 use App\Http\Requests\StoreRecordRequest;
 
-use function PHPSTORM_META\map;
 
 class PeriodController extends Controller
 {
-    
-    public function index()
+    public function __construct()
     {
-        $periods = Period::where('user_id',auth()->user()->id)->latest('id')->paginate();
-        return view('guest.periods.index',compact('periods'));
+      $this->middleware('can:guest.periods.index')->only('index');
+      $this->middleware('can:guest.periods.create')->only('create');
+      $this->middleware('can:guest.periods.edit')->only('edit','update');
+      $this->middleware('can:guest.periods.show')->only('show');
+
+    }
+
+     public function index()
+    {
+        $period = Period::where('user_id',auth()->user()->id)->latest('id')->paginate();
+        return view('guest.periods.index',compact('period'));
     }
 
     
@@ -25,7 +33,7 @@ class PeriodController extends Controller
     {
         $indicators = Indicator::all();
         $quadrants = Quadrant::where('user_id',auth()->user()->id)
-                              ->selectRaw('CONCAT(nomenclature, " - ", state ," - ",axis," - ",municipality," - ",parish) as fullName, id')
+                              ->selectRaw('CONCAT(nomenclature, " - ", state ," - ",axi_id," - ",municipality_id," - ",parish) as fullName, id')
                               ->pluck('fullName','id');
         //$quadrants = Quadrant::where('user_id',auth()->user()->id)->latest('id')->paginate();
         
@@ -35,50 +43,44 @@ class PeriodController extends Controller
     
     public function store(StoreRecordRequest $request)
     {
-        
-        $period = Period::create($request->all());
-        
-        if($request->indicators)
-                
-        $period->indicators()->attach($request->indicators);
-        
-        
-        //return $request
-    }
-        
-      
-    public function show($id)
+
+        $request->validate([
+        'date_regis'    => ['required'],
+        'quadrant_id'    => ['required'], ]);
+        $data = $request->all();
+
+      //dd($data);
+        $indicators = new Period;
+        $indicators->user_id = $data['user_id'];   
+        $indicators->date_regis = $data['date_regis'];   
+        $indicators->quadrant_id = $data['quadrant_id'];
+        $indicators->save();
+
+     if (count($data) > 0)
+          {
+                foreach ($data['indicators'] as $item => $value) 
+                {
+                    
+                        $date2= array(
+                            'period_id' => $indicators->id,
+                            'indicator_id' => $data['indicators'][$item],
+                            'amount' => $data['amount'][$item],
+                            'observation' => $data['observation'][$item],
+                        );
+                        Indicator_period::create($date2);
+                 }
+           }
+           return redirect()->route('guest.periods.index')->with('info','Se proceso el indicador con èxito');
+        }   
+    
+            public function show(Period $period)
     {
-        //
+            $indicators = Indicator::all();
+            $users = User::all();
+            $quadrants = Quadrant::all();
+            
+            return view('guest.periods.show',compact('period','users','quadrants','indicators'));
+
     }
 
-   
-
-    public function edit(Period $period)
-    {
-        return view('guest.periods.edit',compact('period'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Period $period)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

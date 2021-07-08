@@ -5,13 +5,19 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Models\Indicator;
 use Illuminate\Http\Request;
-use App\Models\Record;
 use App\Models\Quadrant;
 use Illuminate\Support\Facades\DB;
-use Psy\Formatter\Formatter;
 
 class RecordController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('can:guest.periods.index')->only('index');
+      $this->middleware('can:guest.periods.create')->only('create');
+      $this->middleware('can:guest.periods.show')->only('show');
+      
+
+    }
     
     public function index()
     {
@@ -53,7 +59,6 @@ class RecordController extends Controller
             
         ];
         
-
         //return dd($datasave);
         //return $request;
 
@@ -62,18 +67,12 @@ class RecordController extends Controller
             'user_id'   => 'required',
             'date_regis' => 'required',    
             'quadrant_id'   => 'required',
-            'indicator_id'   => 'required',
-            //'amount'   => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/'
-                  
+            'indicator_id'   => 'required',          
         ]);
-        
         
          DB::table('records')->insert($datasave);   
         }
-        //$record = Record::create($request->all());
-        //return redirect()->route('guest.records.index',$record)->with('info','El registro se creo con èxito');
     }
-
     
     public function show($id)
     {
@@ -81,20 +80,4 @@ class RecordController extends Controller
     }
 
     
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    
-    public function destroy($id)
-    {
-        //
-    }
 }

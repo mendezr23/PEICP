@@ -1,7 +1,7 @@
 <div class="card">
     <div>
         <div class="card-header">
-            <input wire:model="search" class="form-control" placeholder="Ingrese el numero del cuadrante">
+            <input wire:model="search" class="form-control" placeholder="Ingrese el número ó nombre del cuadrante">
         </div>
     
 
@@ -11,10 +11,10 @@
             <table class="table table-striped table-sm">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Cuadrante</th>
+                        <th>#</th>
+                        <th>Cuadrannte</th>
                         <th>Tipo</th>
-                        <th>Nomenclatura</th>
-                        <th>Estado</th>
+                        <th>Eje</th>
                         <th>Municipio</th>
                         <th>Organismo</th>
                         <th>Responsable</th>
@@ -25,10 +25,10 @@
                    @foreach ($quadrants as $quadrant)
                      <tr>
                         <td>{{$quadrant->id}}</td>
-                        <td>{{$quadrant->type->name}}</td>    
                         <td>{{$quadrant->nomenclature}}</td>
-                        <td>{{$quadrant->state}}</td>
-                        <td>{{$quadrant->municipality}}</td>
+                        <td>{{$quadrant->type->name}}</td>    
+                        <td>{{$quadrant->axi->name}}</td>
+                        <td>{{$quadrant->municipality->name}}</td>
                         <td>{{$quadrant->organism->name}}</td>
                         <td>{{$quadrant->user->name}}</td>
                         <td with="10px">

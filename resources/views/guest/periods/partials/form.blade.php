@@ -17,15 +17,19 @@
 
 <h2 class="h3"> Lista de Indicadores</h2>
 @foreach ($indicators as $indicator)   
-  <div class="text-success">
+  <div >
     <label>
         {!! Form::hidden('indicators[]', $indicator->id, null,) !!}
-        {{$indicator->id}} - {{$indicator->action}} - {{$indicator->activity}}
+        {{$indicator->id}} - <strong class="text-success">{{ $indicator->activity}}</strong>  - {{$indicator->action}} 
     </label>
  </div>
 <div class="col-sm-12 col-xl-12">
-    {!! Form::number('amount[]', 0, ['class'=>'form-control','placeholder'=>'cantidad']) !!}
+    {!! Form::number('amount[]', 0, ['class'=>'form-control','placeholder'=>'cantidad',]) !!}
+    @error('amount')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
     {!! Form::text('observation[]', null, ['class'=>'form-control','placeholder'=>'Ingrese datos de verificacion']) !!}
+    
     
 </div>        
 @endforeach

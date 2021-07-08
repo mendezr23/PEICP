@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Axi;
 use App\Models\User;
 use App\Models\Organism;
 use App\Models\Type;
-use App\Models\Indicator;
+use App\Models\Municipality;
+use App\Models\Region;
 
 
 
@@ -22,10 +24,10 @@ class Quadrant extends Model
             'nomenclature',
             'area',
             'perimeter',
-            'region',
+            'region_id',
             'state',
-            'axis',
-            'municipality',
+            'axis_id',
+            'municipality_id',
             'parish',
             'town',
             'sector',
@@ -50,4 +52,16 @@ class Quadrant extends Model
         return $this->belongsTo(Type::class);
     } 
    
+    public function region(){
+
+        return $this->belongsTo(Region::class);
+    }
+    public function axi(){
+
+        return $this->belongsTo(Axi::class);
+    }
+    public function municipality(){
+
+        return $this->belongsTo(Municipality::class);
+    }
 }

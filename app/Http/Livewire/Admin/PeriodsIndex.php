@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Admin;
 use Livewire\Component;
-use App\Models\Record;
+use App\Models\Period;
 use App\Models\User;
 use App\Models\Quadrant;
 use Livewire\WithPagination;
 
-class RecordsIndex extends Component
+
+class PeriodsIndex extends Component
 {
 
     protected $paginationTheme ="bootstrap";
@@ -18,11 +19,11 @@ class RecordsIndex extends Component
     {
         $users = User::all();
         $quadrants = Quadrant::all();
-        $records = Record::where('user_id',auth()->user()->id)->latest('id')->paginate();
+        $periods = Period::orderBy('id', 'desc')->paginate(10);
+      
         //$records = Record::paginate();
                
-        return view('livewire.admin.records-index',compact('records','users','quadrants'));
-
+        return view('livewire.admin.periods-index',compact('periods','users','quadrants'));
         
     }
     

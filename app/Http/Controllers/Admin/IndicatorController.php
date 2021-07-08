@@ -39,7 +39,8 @@ class IndicatorController extends Controller
         $request->validate([
 
             'activity' => 'required',
-            'action'   => 'required'
+            'action' => 'required',
+            
         ]);
         
         $indicator = Indicator::create($request->all());
@@ -58,7 +59,8 @@ class IndicatorController extends Controller
         $request->validate([
 
             'activity' => 'required',
-            'action'   => 'required'
+            'action'   => 'required',
+            
         ]);
         $indicator->update($request->all());
         return redirect()->route('admin.indicators.edit',$indicator)->with('info','El indicador se actualizo con èxito');

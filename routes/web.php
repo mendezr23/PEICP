@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,8 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
     return view('admin.index');
 })->name('admin');
+
+
+
+Route::get('pdf/preview', [PDFController::class, 'preview'])->name('pdf.preview');
+Route::get('pdf/generate', [PDFController::class, 'generatePDF'])->name('pdf.generate');

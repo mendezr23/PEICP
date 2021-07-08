@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Period;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Indicator;
 use App\Models\Quadrant;
 
 class PeriodFactory extends Factory

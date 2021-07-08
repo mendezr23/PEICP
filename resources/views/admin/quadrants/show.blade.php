@@ -9,27 +9,27 @@
 @section('content')
 <div class="container py-8">
 
-
-    <div class="card text-white bg-secondary mb-3" style="max-width: 50rem;">
-      <div class="card-header">Cuadrante {{$quadrant->id}} </div>
-      <div class="card-header">Numero {{$quadrant->number}} </div>
-      <div class="card-header">Nomenclatura {{$quadrant->nomenclature}} </div>
-      <div class="card-header">Region {{$quadrant->region}} </div>
-      <div class="card-header">Estado {{$quadrant->state}} </div>
-      <div class="card-header">Eje {{$quadrant->axis}} </div>
-      <div class="card-header">Municipio {{$quadrant->minicipality}} </div>
-      <div class="card-header">Parroquia {{$quadrant->parish}} </div>
-      <div class="card-header">Publo {{$quadrant->town}} </div>
-      <div class="card-header">Sector {{$quadrant->sector}} </div>
-      <div class="card-header">Organismo {{$quadrant->organism->name}} </div>
-      <div class="card-header">Usuario Responsable {{$quadrant->user->name}} </div>
-      
-      <div class="card-body">
-         
-      </div>
-    </div>
-
-</div>    
+    <div class="callout callout-info">
+        <h5><i class="fas fa-info"></i> Detalles del Cuadrante:</h5>
+        <b># Cuadrante: </b>{{$quadrant->id}}<br>
+        <b>Número: </b>{{$quadrant->number}}<br>
+        <b>Nomenclatura:</b> {{$quadrant->nomenclature}}<br>
+        <b>Región:</b> {{$quadrant->region->name}}<br>
+        <b>Estado:</b> {{$quadrant->state}}<br>
+        <b>Eje:</b> {{$quadrant->axi->name}}<br>
+        <b>Municipio:</b> {{$quadrant->municipality->name}}<br>
+        <b>Parroquia:</b> {{$quadrant->parish}}<br>
+        <b>Pueblo:</b> {{$quadrant->town}}<br>
+        <b>Sector:</b> {{$quadrant->sector}}<br>
+        <b>Organismo:</b> {{$quadrant->organism->name}}<br>
+        <b>Responsable:</b> {{$quadrant->user->name}}<br>
+        
+  </div>
+        <div class="mt-10">
+            <a href="{{ route('admin.quadrants.index') }}" class="button">
+                Atras
+            </a>
+        </div>    
 @stop
 
 @section('css')

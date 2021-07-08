@@ -283,6 +283,7 @@ return [
             'can'  => ['admin.organisms.index']
         ],
         
+
         [
             'text' => 'Registrar Indicador',
             'route' => 'guest.periods.index',
@@ -291,7 +292,28 @@ return [
             'can' => ['guest.periods.index']
         ],
         
-        
+        [
+            'text' => 'Consultas',
+            'route' => 'admin.periods.index',
+            'icon' => 'fas fa-chart-line fa-fw fa-fw',
+            'active'=> ['admin/periods*'],
+            'can' => ['admin.periods.index'],
+            'submenu' => [
+                [
+                    'text' => 'General',
+                    'route' => 'admin.periods.index',
+                    'active'=> ['admin/periods*'],
+                    
+                ],
+                [
+                    'text' => 'Reporte por Fechas',
+                    'route' => 'admin.reports.index',
+                    'active'=> ['admin/reports*'],
+                    
+                ],
+                
+            ],
+        ]
         
     ],
 

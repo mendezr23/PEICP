@@ -20,10 +20,10 @@ class CreateQuadrantsTable extends Migration
             $table->text('nomenclature');
             $table->double('area');
             $table->double('perimeter');
-            $table->text('region');
+            $table->unsignedBigInteger('region_id')->nullable();
             $table->string('state');
-            $table->string('axis');
-            $table->string('municipality');
+            $table->unsignedBigInteger('axi_id')->nullable();
+            $table->unsignedBigInteger('municipality_id')->nullable();
             $table->string('parish');
             $table->string('town');
             $table->longText('sector');
@@ -32,6 +32,9 @@ class CreateQuadrantsTable extends Migration
             $table->unsignedBigInteger('organism_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('set null');
+            $table->foreign('axi_id')->references('id')->on('axis')->onDelete('set null');
+            $table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('set null');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('set null');
             $table->foreign('organism_id')->references('id')->on('organisms')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

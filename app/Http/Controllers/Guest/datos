@@ -14,7 +14,7 @@ return $request;
         return redirect()->route('guest.periods.edit', $period);
 
 
- $period = Period::create($request->all());
+            $period = Period::create($request->all());
 
             $indicators = collect($request->input(key:'indicators',$indicators))
                          ->map(function($indicator) {
@@ -44,4 +44,47 @@ $period->indicators()->attach($request->indicators);
     }
 
 
-//if ($request->has(['indicators','amount','observation']))
+//if ($request->has(['indicators','amount','observation']))//return $request;
+        $period = Period::create($request->all());
+        if($request->indicators)
+        $indicadors=$request->indicators;
+       
+        foreach($indicadors as $indicator){
+        $period->indicators()->attach($indicator);
+    }
+        return $request;
+
+
+        if{count($request['indicators']>0)}
+        {
+        
+            foreach ($request as $items => $value) {
+                $request = array {
+                      'indicator_id' => $period->id,
+                      'amount'       => $request->amount,  
+                      'observation'  => $request->observation,  
+                };
+        
+            }
+
+
+              $period = Period::create($request->all());
+        if($request->indicators)
+        $indicators=$request->indicators;
+       
+        foreach($indicators as $indicator){
+        $period->indicators()->attach($request->indicator);
+
+        return redirect()->route('guest.periods.edit', $period);
+
+         }
+
+
+
+         $table->unsignedBigInteger('indicator_id');
+            $table->unsignedBigInteger('period_id');
+            $table->integer('amount')->nullable();
+            $table->string('observation')->nullable();
+
+            $table->foreign('indicator_id')->references('id')->on('indicators');
+            $table->foreign('period_id')->references('id')->on('periods');

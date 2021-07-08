@@ -24,6 +24,7 @@ class IndicatorFactory extends Factory
         return [
             'activity' => $this->faker->text(10),
             'action' => $this->faker->text(10),
+            
 
         ];
     }

@@ -17,7 +17,7 @@ class Indicator extends Model
     //relacion muchos a muchos
     
     {
-        return $this->belongsToMany(Period::class)
+        return $this->belongsToMany(Period::class,'indicator_periods')
                 ->withPivot('amount','observation')
                 ->withTimestamps();
                     
